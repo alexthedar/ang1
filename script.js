@@ -21,8 +21,10 @@ var app = angular.module('computer', ['ngRoute'])
   .otherwise({redirectTo:'/main'})
 }])
 
-.controller('MainCtrl', ['$scope',function($scope){
-
+.controller('MainCtrl', ['$scope','$http',function($scope,$http){
+  $http.get('services.json').then(function(response){
+    $scope.services = response.data;
+  })
 }])
 .controller('ServicesCtrl', ['$scope', '$http', function($scope, $http){
   $http.get('services.json').then(function(response){
@@ -30,5 +32,7 @@ var app = angular.module('computer', ['ngRoute'])
   })
 }])
 .controller('ContactCtrl', ['$scope', '$http',function($scope, $http){
-
+  $http.get('locations.json').then(function(response){
+    $scope.locations = response.data;
+  })
 }]);
